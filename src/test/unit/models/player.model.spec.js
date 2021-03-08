@@ -1,5 +1,5 @@
-import { Player, getPlayerByNick, createPlayer, updatePlayer } from '../../../app/models/player.model';
-import { playerData, playerFindByPk } from '../../mocks/data.mock';
+import { Player, getPlayerByNick, createPlayer, updatePlayer, getHighestScore } from '../../../app/models/player.model';
+import { playerData, playerFindByPk, rankingData } from '../../mocks/data.mock';
 
 describe('Player Model', () => {
 
@@ -7,6 +7,12 @@ describe('Player Model', () => {
     Player.findByPk = jest.fn(() => Promise.resolve(playerData));
     const response = await getPlayerByNick(playerData.nick);
     expect(response).toEqual(playerData);
+  });
+
+  it('getHighestScore', async () => {
+    Player.findAll = jest.fn(() => Promise.resolve([...rankingData]));
+    const response = await getHighestScore();
+    expect(response).toEqual([...rankingData]);
   });
 
   it('createPlayer', async () => {

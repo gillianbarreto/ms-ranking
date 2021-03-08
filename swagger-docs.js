@@ -1,4 +1,5 @@
-const { getRanking } = require('./swagger-tags/ranking.swagger.tag');
+const { getRanking, getRankingBoard } = require('./swagger-tags/ranking.swagger.tag');
+const { updateScore } = require('./swagger-tags/score.swagger.tag');
 
 const swaggerDoc = {
   openapi: "3.0.1",
@@ -28,11 +29,20 @@ const swaggerDoc = {
   tags: [
     {
       name: "Ranking",
+    },
+    {
+      name: "Score",
     }
   ],
   paths: {
     "/ranking": {
       post: getRanking
+    },
+    "/ranking-board": {
+      get: getRankingBoard
+    },
+    "/score": {
+      post: updateScore
     }
   },
 };

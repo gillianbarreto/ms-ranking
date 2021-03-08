@@ -31,3 +31,21 @@ export const getPlayerRanking = async (data) => {
 export const getHigthScore = async (scores) => {
   return Math.max(...scores);
 }
+
+export const getRankingBoard = async (highestScore) => {
+
+  let rankingPlayers = [];
+  let rank = 1;
+  const n = highestScore.length;
+
+  for (let i = 0; i < n; i++) {
+    if (highestScore[i].score < highestScore[i - 1]?.score) rank += 1;
+    rankingPlayers.push({
+      nick: highestScore[i].nick,
+      score: highestScore[i].score,
+      rank
+    })
+  }
+
+  return rankingPlayers;
+}

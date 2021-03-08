@@ -16,4 +16,10 @@ describe('rankingController', () => {
     expect(res.statusCode).toEqual(200);
   });
 
+  it('rankingBoardController, obtiene 200', async () => {
+    module.rankingBoardModule.mockResolvedValue(message200());
+    await controller.rankingBoardController(req, res);
+    expect(res.statusCode).toEqual(200);
+  });
+
 });

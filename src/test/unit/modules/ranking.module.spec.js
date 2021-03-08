@@ -1,8 +1,8 @@
-import { rankingModule } from '../../../app/modules/v1/ranking.module';
-import { getPlayerRanking, getHigthScore } from '../../../app/services/v1/ranking.service';
-import { rankingBody, rankingResponse } from '../../mocks/data.mock';
+import { rankingModule, rankingBoardModule } from '../../../app/modules/v1/ranking.module';
+import { getPlayerRanking, getHigthScore, getRankingBoard } from '../../../app/services/v1/ranking.service';
+import { rankingBody, rankingResponse, rankingData, rankingBoardData, rankingBoardResponse } from '../../mocks/data.mock';
 import { message200, message500 } from '../../mocks/response.mock';
-import { getPlayerByNick, updatePlayer } from '../../../app/models/player.model';
+import { updatePlayer, getHighestScore } from '../../../app/models/player.model';
 
 jest.mock('../../../app/models/player.model');
 jest.mock('../../../app/services/v1/ranking.service');
@@ -24,4 +24,17 @@ describe('Ranking Module', () => {
     expect(response).toEqual(message500(null));
   });
 
+  it('rankingBoardModule - return 200', async () => {
+    getHighestScore.mockResolvedValue([...rankingData]);
+    getRankingBoard.mockResolvedValue([...rankingBoardData]);
+
+    const response = await rankingBoardModule();
+    expect(response).toEqual(rankingBoardResponse);
+  });
+
+  it('rankingBoardModule - return 500', async () => {
+    getHighestScore.mockRejectedValue(null);
+    const response = await rankingBoardModule();
+    expect(response).toEqual(message500(null));
+  });
 });

@@ -1,5 +1,5 @@
-import { getPlayerRanking, getHigthScore } from '../../../app/services/v1/ranking.service';
-import { rankingBody } from '../../mocks/data.mock';
+import { getPlayerRanking, getHigthScore, getRankingBoard } from '../../../app/services/v1/ranking.service';
+import { rankingBody, rankingData, rankingBoardData } from '../../mocks/data.mock';
 
 describe('Ranking Service', () => {
 
@@ -11,6 +11,11 @@ describe('Ranking Service', () => {
   it('getHigthScore', async () => {
     const higthScore = await getHigthScore(rankingBody.playerScore);
     expect(higthScore).toEqual(105);
+  });
+
+  it('getRankingBoard', async () => {
+    const rankingPlayers = await getRankingBoard([...rankingData]);
+    expect(rankingPlayers).toEqual([...rankingBoardData]);
   });
 
 });

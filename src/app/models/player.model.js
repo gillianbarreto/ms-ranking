@@ -27,6 +27,18 @@ export const getPlayerByNick = async (nick) => {
   return await Player.findByPk(nick);
 }
 
+export const getHighestScore = async () => {
+  return await Player.findAll(
+    {
+      limit: 10,
+      order: [
+        ['score', 'DESC']
+      ],
+      attributes: ['nick', 'score']
+    }
+  );
+}
+
 export const createPlayer = async (nick, score) => {
   return await Player.create({
     nick,
@@ -37,6 +49,7 @@ export const createPlayer = async (nick, score) => {
 
 export const updatePlayer = async (nick, score) => {
   try {
+    nick = nick.toLowerCase();
     let player = await getPlayerByNick(nick);
     if (!player) return await createPlayer(nick, score);
 

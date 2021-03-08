@@ -1,4 +1,4 @@
-const { responseGetRanking, responseError404, responseError500, responseBadRequest } = require('./response');
+const { responseGetRanking, responseError500, responseBadRequest, responseGetRankingBoard } = require('./response');
 
 const getRanking = {
   tags: ['Ranking'],
@@ -43,5 +43,18 @@ const getRanking = {
   }
 };
 
+const getRankingBoard = {
+  tags: ['Ranking'],
+  description: 'Obtener tabla de clasificacion',
+  operationId: 'getRankingBoard',
+  responses: {
+    200: {
+      description: 'Consulta exitosa',
+      content: responseGetRankingBoard
+    },
+    400: responseBadRequest,
+    500: responseError500
+  }
+};
 
-module.exports = { getRanking }
+module.exports = { getRanking, getRankingBoard }

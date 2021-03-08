@@ -37,6 +37,28 @@ export const validateRankingRequest = () => {
   ];
 }
 
+export const validateScoreRequest = () => {
+  return [
+    body('nick')
+      .notEmpty()
+      .withMessage('Campo Obligatorio')
+      .isString()
+      .withMessage('Debe ser un string')
+      .isLength({ min: 3, max: 10 })
+      .withMessage('Es inválido'),
+    body('score')
+      .notEmpty()
+      .withMessage('Campo Obligatorio')
+      .isNumeric()
+      .withMessage('Es inválido')
+      .custom(score => {
+        const max = Math.pow(10, 9);
+        return score >= 0 && score <= max
+      })
+      .withMessage('Valor de score incorrecto')
+  ];
+}
+
 export const validate = (req, res, next) => {
 
   const errors = validationResult(req);
