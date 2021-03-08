@@ -1,19 +1,6 @@
 # MS - Ranking
 
 MS para determinar los ranking's de un videojuego
-
-## Parámetros recibidos
-- nick: identificador del jugador
-- tableRanked: arreglo de puntuaciones de la tabla de clasificación
-- playerScore: arreglo de puntuaciones del jugador
-
-## Restricciones
-
-- tableRanked y playerScore tienen una longitud entre 1 y 2 x 10^5 posiciones.
-- Cada valor del arreglo debe estar entre 0 y 10^9.
-- tableRanked está en orden descendiente.
-- playerScore está en orden ascendente.
-
 ## Ejemplo
 
 tableRanked: [100, 90, 90, 80]
